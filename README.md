@@ -24,6 +24,8 @@ To install necessary dependencies, run the following command:
 ```
 npm i
 ```
+## Walkthrough
+https://youtu.be/kTWBJdAjQZk
 
 ## Usage
 
