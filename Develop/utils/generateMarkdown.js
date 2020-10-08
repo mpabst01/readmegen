@@ -1,12 +1,23 @@
 function renderLicenseBadge(license) {
-  if (license !== "None") {
+  if (lic !== "None") {
     return `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`;
   }
   return "";
 }
 
-function renderLicenseLink(license) {
-  if (license !== "None") {
+function renderLicenseSection(lic) {
+  if (lic !== "None") {
+    return (
+      `## License
+
+This project is licensed under the ${lic} license.`
+    );
+  }
+  return "";
+}
+
+function renderLicenseLink(lic) {
+  if (lic !== "None") {
     return (
       "\n* [License](#license)\n"
     );
@@ -14,20 +25,9 @@ function renderLicenseLink(license) {
   return "";
 }
 
-function renderLicenseSection(license) {
-  if (license !== "None") {
-    return (
-      `## License
-
-This project is licensed under the ${license} license.`
-    );
-  }
-  return "";
-}
-
-function generateMarkdown(data) {
+function generateMkd(data) {
   return `# ${data.title}
-${renderLicenseBadge(data.license)}
+${renderLicenseBadge(data.lic)}
 
 ## Description
 
@@ -38,12 +38,19 @@ ${data.description}
 * [Installation](#installation)
 
 * [Usage](#usage)
-${renderLicenseLink(data.license)}
+${renderLicenseLink(data.lic)}
 * [Contributing](#contributing)
 
 * [Tests](#tests)
 
 * [Questions](#questions)
+
+## Usage
+
+${data.usage}
+
+${renderLicenseSection(data.lic)}
+
 
 ## Installation
 
@@ -53,15 +60,6 @@ To install necessary dependencies, run the following command:
 ${data.installation}
 \`\`\`
 
-## Usage
-
-${data.usage}
-
-${renderLicenseSection(data.license)}
-  
-## Contributing
-
-${data.contributing}
 
 ## Tests
 
@@ -71,6 +69,10 @@ To run tests, run the following command:
 ${data.test}
 \`\`\`
 
+## Contributing
+
+${data.contributing}
+
 ## Questions
 
 If you have any questions about the repo, open an issue or contact me directly at ${data.email}. You can find more of my work at [${data.github}](https://github.com/${data.github}/).
@@ -78,4 +80,4 @@ If you have any questions about the repo, open an issue or contact me directly a
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = generateMkd;
