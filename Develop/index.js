@@ -1,10 +1,9 @@
+const inquirer = require("inquirer");
+const genMkd = require("./utils/genMarkdown");
+
 const fs = require("fs");
 const path = require("path");
-const inquirer = require("inquirer");
-const generateMarkdown = require("./utils/generateMarkdown");
 
-
-// array of questions for user
 const questions = [
     {
         type: "input",
@@ -58,12 +57,12 @@ const questions = [
 
 
 // function to write README file
-function writeToFile(fileName, data) {
+function writeToFile(fName, data) {
     let outputPath = path.join(process.cwd(), "./output");
     if (!fs.existsSync(outputPath)) {
         fs.mkdirSync(outputPath);
     }
-    outputPath = path.join(outputPath, fileName);
+    outputPath = path.join(outputPath, fName);
     fs.writeFileSync(outputPath, data);
     return outputPath;
 }
@@ -73,10 +72,8 @@ function writeToFile(fileName, data) {
 // function to initialize program
 function init() {
     inquirer.prompt(questions).then((inquirerResponses) => {
-        console.log("Generating README...");
-        const markdownString = generateMarkdown({ ...inquirerResponses });
-        const outputFilePath = writeToFile("README.md", markdownString);
-        console.log(`Created ${outputFilePath}`);
+        const mkdString = genMkd({ ...inquirerResponses });
+        const outputFilePath = writeToFile("README.md", mkdString);
     });
 }
 
